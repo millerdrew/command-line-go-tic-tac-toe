@@ -1,6 +1,10 @@
 // Two-player Go Command Line Tic Tac Toe
-// Copyright 2019 Drew Miller
-// millerdrew@gmail.com
+/*
+
+  TODO:
+  Check for win/lose condition
+  Computerized AI
+*/
 
 package main
 
