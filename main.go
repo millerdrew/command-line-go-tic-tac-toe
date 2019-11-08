@@ -1,6 +1,5 @@
 // Two-player Go Command Line Tic Tac Toe
 /*
-
   TODO:
   Check for win/lose condition
   Computerized AI
@@ -11,9 +10,11 @@ package main
 import "fmt"
 import "strconv"
 
-func createBoard() [3][3]string {
+type Board [3][3]string
+
+func createBoard() Board {
   x := 0
-  var b [3][3]string
+  var b Board
   for i := 0; i < 3; i++ {
     for j := 0; j < 3; j++ {
       x++
@@ -23,11 +24,11 @@ func createBoard() [3][3]string {
   return b
 }
 
-func printBoard(b[3][3]string) {
+func printBoard(b Board) {
   fmt.Printf("\t%s|%s|%s\n\t%s|%s|%s\n\t%s|%s|%s\n", b[0][0], b[0][1], b[0][2], b[1][0], b[1][1], b[1][2], b[2][0], b[2][1], b[2][2])
 }
 
-func markBoard(b[3][3]string, player int, input string) [3][3]string {
+func markBoard(b Board, player int, input string) Board {
   for i := 0; i < 3; i++ {
     for j := 0; j < 3; j++ {
       if b[i][j] == input {
