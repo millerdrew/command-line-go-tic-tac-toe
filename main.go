@@ -12,6 +12,37 @@ import "strconv"
 
 type Board [3][3]string
 
+func checkWinner(b Board, player int) bool {
+  var mark string
+  switch player {
+    case 1: mark = "X"
+    case 2: mark = "O"
+  }
+  for i := 0; i < 3; i++ {
+    horizontal := 0
+    vertical := 0
+    for j := 0; j < 3; j++ {
+      if b[i][j] == mark {
+        horizontal++
+      }
+      if b[j][i] == mark {
+        vertical++
+      }
+      if horizontal == 3 || vertical == 3 {
+        return true
+      }
+    }
+  }
+  // Check Diagonal
+  if b[0][0] == mark && b[1][1] == mark && b[2][2] == mark {
+    return true
+  }
+  if b[2][0] == mark && b[1][1] == mark && b[0][2] == mark {
+    return true
+  }
+  return false
+}
+
 func createBoard() Board {
   x := 0
   var b Board
@@ -52,6 +83,10 @@ func mainLoop() {
     fmt.Scanf("%s", &input)
     b = markBoard(b, player, input)
     printBoard(b)
+    if checkWinner(b, player) == true {
+      fmt.Printf("Player %d wins!", player)
+      gameOver = 1
+    }
     switch player {
       case 1: player = 2
       case 2: player = 1
