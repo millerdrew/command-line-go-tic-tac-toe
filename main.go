@@ -77,7 +77,9 @@ func mainLoop() {
   gameOver := 0
   player := 1
   b := createBoard()
+  moves := 0
   for gameOver == 0 {
+    moves++
     fmt.Printf("Player %d: Make your move, select a # 1-9 (or 'exit')\n", player)
     var input string
     fmt.Scanf("%s", &input)
@@ -86,6 +88,7 @@ func mainLoop() {
     if checkWinner(b, player) == true {
       fmt.Printf("Player %d wins!", player)
       gameOver = 1
+      break
     }
     switch player {
       case 1: player = 2
@@ -93,6 +96,10 @@ func mainLoop() {
     }
     if input == "exit" {
       fmt.Println("Game over")
+      gameOver = 1
+    }
+    if moves == 9 {
+      fmt.Println("It's a tie!")
       gameOver = 1
     }
   }
