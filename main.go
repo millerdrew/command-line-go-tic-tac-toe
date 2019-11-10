@@ -1,7 +1,6 @@
 // Two-player Go Command Line Tic Tac Toe
 /*
   TODO:
-  Use colors
   Computerized AI
 */
 
@@ -9,6 +8,7 @@ package main
 
 import (
   "fmt"
+  . "github.com/logrusorgru/aurora"
   "strconv"
   "regexp"
   "os"
@@ -30,7 +30,15 @@ func createBoard() Board {
 }
 
 func printBoard(b Board) {
-  fmt.Printf("\t%s|%s|%s\n\t%s|%s|%s\n\t%s|%s|%s\n", b[0][0], b[0][1], b[0][2], b[1][0], b[1][1], b[1][2], b[2][0], b[2][1], b[2][2])
+  fmt.Printf("\t%s|%s|%s\n\t%s|%s|%s\n\t%s|%s|%s\n", pickColor(b[0][0]), pickColor(b[0][1]), pickColor(b[0][2]), pickColor(b[1][0]), pickColor(b[1][1]), pickColor(b[1][2]), pickColor(b[2][0]), pickColor(b[2][1]), pickColor(b[2][2]))
+}
+
+func pickColor(s string) Value {
+  switch s {
+    case "X": return Red(s).Bold()
+    case "O": return Magenta(s).Bold()
+    default:  return Cyan(s).Bold()
+  }
 }
 
 func markBoard(b Board, player int, input string) (Board, bool) {
